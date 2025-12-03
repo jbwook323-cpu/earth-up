@@ -67,7 +67,7 @@ export default function Home() {
               >
                 <div className="h-full flex flex-col justify-between gap-10">
                   <div>
-                    <h3 className="text-3xl font-bold text-white mb-4">Smart Delivery Hub</h3>
+                    <h3 className="text-3xl font-bold text-white mb-4">Smart Delivery Hub!</h3>
                     <p className="text-white/80 text-xl font-light leading-relaxed">
                       지역 내 <strong>무인 매장</strong>을 물류 허브로 활용합니다.<br/>
                       가장 가까운 곳에서 시작되는 효율적인 배달,<br/>
