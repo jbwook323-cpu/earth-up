@@ -1,7 +1,8 @@
 'use client';
 
 import Spline from '@splinetool/react-spline';
-import { useScroll, useTransform, motion } from 'framer-motion';
+// [수정 1] Variants 라는 이름표를 꺼내옵니다.
+import { useScroll, useTransform, motion, Variants } from 'framer-motion';
 import { useRef } from 'react';
 
 export default function Home() {
@@ -11,14 +12,15 @@ export default function Home() {
     offset: ["start start", "end end"]
   });
 
-  // 스크롤 시 지구 움직임 (아래로 내려갔다 위로 솟구침)
   const earthY = useTransform(scrollYProgress, [0, 1], ["0%", "-50%"]);
-  // 텍스트 투명도 조절
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
 
-  // 그리드 카드 애니메이션 설정 (아래에서 위로 튕기듯 올라옴)
-  const cardVariants = {
-    offscreen: { y: 50, opacity: 0 },
+  // [수정 2] : Variants 라고 명찰을 딱 붙여줍니다. (이게 핵심!)
+  const cardVariants: Variants = {
+    offscreen: { 
+      y: 50, 
+      opacity: 0 
+    },
     onscreen: { 
       y: 0, 
       opacity: 1,
@@ -29,10 +31,10 @@ export default function Home() {
   return (
     <div ref={containerRef} className="relative bg-black h-[300vh]">
       
-      {/* [LAYER 1] 3D Earth (배경 고정) */}
+      {/* [LAYER 1] 3D Earth */}
       <div className="fixed inset-0 w-full h-screen z-0">
         <motion.div style={{ y: earthY }} className="w-full h-full">
-          {/* [FIXED] 개발자님이 지정하신 공식 지구 URL입니다 */}
+          {/* 고객님이 픽스하신 그 주소 그대로입니다 */}
           <Spline scene="https://prod.spline.design/hCHg1FCOJnI4QL6G/scene.splinecode" />
         </motion.div>
       </div>
@@ -40,7 +42,7 @@ export default function Home() {
       {/* [LAYER 2] 콘텐츠 영역 */}
       <div className="relative z-10 pointer-events-none">
         
-        {/* 섹션 1: Hero (메인 타이틀) */}
+        {/* 섹션 1: Hero */}
         <section className="h-screen flex flex-col items-center justify-center">
           <motion.div style={{ opacity: textOpacity }} className="text-center z-10">
             <h1 className="text-7xl md:text-9xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-blue-300 to-blue-600 mb-4 tracking-tighter">
@@ -50,7 +52,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* 섹션 2: Bento Grid (핵심 가치) */}
+        {/* 섹션 2: Bento Grid */}
         <section className="min-h-screen flex flex-col items-center justify-center p-6 md:p-10">
           <div className="max-w-6xl w-full">
             <motion.h2 
@@ -62,10 +64,9 @@ export default function Home() {
               우리가 만드는 <span className="text-blue-500">변화의 물결</span>
             </motion.h2>
 
-            {/* 그리드 레이아웃 시작 */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pointer-events-auto">
               
-              {/* 카드 1: 큰 카드 (왼쪽, 2칸 차지) */}
+              {/* 카드 1 */}
               <motion.div 
                 initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.3 }} variants={cardVariants}
                 className="md:col-span-2 bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-10 hover:bg-white/10 transition-colors group"
@@ -78,14 +79,13 @@ export default function Home() {
                       불필요한 탄소 배출을 획기적으로 줄입니다.
                     </p>
                   </div>
-                  {/* 카드 내부 장식 (그라데이션 박스) */}
                   <div className="mt-10 h-40 bg-gradient-to-r from-blue-600/20 to-purple-600/20 rounded-2xl flex items-center justify-center border border-white/5 group-hover:scale-[1.02] transition-transform duration-500">
                     <span className="text-white/40 font-mono text-sm">Interactive Map Visualization</span>
                   </div>
                 </div>
               </motion.div>
 
-              {/* 카드 2: 작은 카드 (오른쪽 위) */}
+              {/* 카드 2 */}
               <motion.div 
                 initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.3 }} variants={cardVariants}
                 className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl p-8 hover:bg-white/10 transition-colors"
@@ -99,7 +99,7 @@ export default function Home() {
                 </p>
               </motion.div>
 
-              {/* 카드 3: 작은 카드 (오른쪽 아래) */}
+              {/* 카드 3 */}
               <motion.div 
                  initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.3 }} variants={cardVariants}
                  className="bg-blue-600/20 backdrop-blur-lg border border-blue-500/30 rounded-3xl p-8 hover:bg-blue-600/30 transition-colors"
@@ -117,7 +117,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 섹션 3: 피날레 (Call to Action) */}
+        {/* 섹션 3: 피날레 */}
         <section className="h-screen flex flex-col items-center justify-center pointer-events-auto">
            <h2 className="text-5xl md:text-7xl font-bold text-white text-center mb-10 tracking-tight leading-tight">
              Ready to <br/> <span className="text-blue-500">Earth Up?</span>
