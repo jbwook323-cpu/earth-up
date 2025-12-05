@@ -24,7 +24,8 @@ export default function Home() {
   };
 
   return (
-    <div ref={containerRef} className="relative bg-black h-[300vh]">
+    // ✨ [수정 1] h-[300vh]를 min-h-[300vh]로 변경 (내용이 길어져도 안 잘리게)
+    <div ref={containerRef} className="relative bg-black min-h-[300vh]">
       
       {/* 1. 배경 지구 */}
       <div className="fixed inset-0 w-full h-screen z-0">
@@ -46,7 +47,7 @@ export default function Home() {
           </motion.div>
         </section>
 
-        {/* Bento Grid Section (어스업 내용 반영됨!) */}
+        {/* Bento Grid Section */}
         <section className="min-h-screen flex flex-col items-center justify-center p-6 md:p-10">
           <div className="max-w-6xl w-full">
             <motion.h2 
@@ -60,7 +61,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pointer-events-auto">
               
-              {/* 카드 1: 어스업 플랫폼 & 딜리버리 허브 (메인) */}
+              {/* 카드 1 */}
               <motion.div 
                 initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.3 }} variants={cardVariants}
                 className="md:col-span-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-[2rem] p-12 hover:bg-white/15 transition-all duration-300 group"
@@ -74,14 +75,13 @@ export default function Home() {
                       어스업 플랫폼이 연결합니다.
                     </p>
                   </div>
-                  {/* 시각적 장식 */}
                   <div className="h-40 bg-gradient-to-br from-blue-900/40 to-indigo-900/40 rounded-2xl flex items-center justify-center border border-white/10 group-hover:scale-[1.02] transition-transform duration-500">
                     <span className="text-white/70 font-mono text-lg">Hub-based Logistics System</span>
                   </div>
                 </div>
               </motion.div>
 
-              {/* 카드 2: 폐기물 수거 (Reverse Logistics) */}
+              {/* 카드 2 */}
               <motion.div 
                 initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.3 }} variants={cardVariants}
                 className="bg-white/10 backdrop-blur-md border border-white/20 rounded-[2rem] p-10 hover:bg-white/15 transition-all duration-300 flex flex-col justify-between"
@@ -97,7 +97,7 @@ export default function Home() {
                 </div>
               </motion.div>
 
-              {/* 카드 3: 지역 문제 해결 */}
+              {/* 카드 3 */}
               <motion.div 
                  initial="offscreen" whileInView="onscreen" viewport={{ once: true, amount: 0.3 }} variants={cardVariants}
                  className="bg-blue-900/30 backdrop-blur-md border border-blue-500/30 rounded-[2rem] p-10 hover:bg-blue-900/40 transition-all duration-300 flex flex-col justify-between"
@@ -126,8 +126,26 @@ export default function Home() {
              지금 시작하기
            </button>
         </section>
+      </div> 
+      {/* ⚠️ 여기서 닫히던 div를 지웠습니다! */}
 
-      </div>
-    </div>
-  );
-}
+      {/* 👇 여기서부터 기사님 앱 다운로드 섹션 */}
+      {/* ✨ [수정 2] 이 섹션이 전체 div 안에 포함되도록 위치 조정됨 */}
+      <section style={{ backgroundColor: '#f9f9f9', padding: '60px 20px', textAlign: 'center', borderTop: '1px solid #eee', width: '100%', color: 'black', position: 'relative', zIndex: 20 }}>
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <h2 style={{ color: '#333', fontSize: '28px', marginBottom: '10px', fontWeight: 'bold' }}>🛵 스푼업 기사님 앱 다운로드</h2>
+          <p style={{ color: '#666', marginBottom: '30px' }}>
+            안드로이드 폰에서 아래 QR코드를 찍거나 버튼을 눌러 설치해주세요.<br />
+            (현재는 테스트 버전입니다)
+          </p>
+
+          {/* QR코드 이미지 */}
+          <div style={{ background: 'white', padding: '15px', display: 'inline-block', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.1)', marginBottom: '25px' }}>
+            {/* 이미지는 public 폴더에 있어야 합니다 */}
+            <img src="/qr.png" alt="다운로드 QR코드" style={{ width: '150px', height: '150px' }} />
+          </div>
+
+          <br />
+
+          {/* 다운로드 버튼 */}
+          <a href="https://i.diawi.com/f4s79G" target="_blank" rel="noopener noreferrer"
