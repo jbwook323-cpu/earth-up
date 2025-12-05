@@ -24,7 +24,6 @@ export default function Home() {
   };
 
   return (
-    // ✨ [수정 1] h-[300vh]를 min-h-[300vh]로 변경 (내용이 길어져도 안 잘리게)
     <div ref={containerRef} className="relative bg-black min-h-[300vh]">
       
       {/* 1. 배경 지구 */}
@@ -127,10 +126,8 @@ export default function Home() {
            </button>
         </section>
       </div> 
-      {/* ⚠️ 여기서 닫히던 div를 지웠습니다! */}
 
-      {/* 👇 여기서부터 기사님 앱 다운로드 섹션 */}
-      {/* ✨ [수정 2] 이 섹션이 전체 div 안에 포함되도록 위치 조정됨 */}
+      {/* 👇 기사님 앱 다운로드 섹션 */}
       <section style={{ backgroundColor: '#f9f9f9', padding: '60px 20px', textAlign: 'center', borderTop: '1px solid #eee', width: '100%', color: 'black', position: 'relative', zIndex: 20 }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <h2 style={{ color: '#333', fontSize: '28px', marginBottom: '10px', fontWeight: 'bold' }}>🛵 스푼업 기사님 앱 다운로드</h2>
@@ -139,13 +136,26 @@ export default function Home() {
             (현재는 테스트 버전입니다)
           </p>
 
-          {/* QR코드 이미지 */}
           <div style={{ background: 'white', padding: '15px', display: 'inline-block', borderRadius: '15px', boxShadow: '0 5px 15px rgba(0,0,0,0.1)', marginBottom: '25px' }}>
-            {/* 이미지는 public 폴더에 있어야 합니다 */}
             <img src="/qr.png" alt="다운로드 QR코드" style={{ width: '150px', height: '150px' }} />
           </div>
 
           <br />
 
-          {/* 다운로드 버튼 */}
           <a href="https://i.diawi.com/f4s79G" target="_blank" rel="noopener noreferrer"
+             style={{ backgroundColor: '#ff6b01', color: 'white', padding: '15px 40px', textDecoration: 'none', borderRadius: '30px', fontWeight: 'bold', fontSize: '18px', display: 'inline-block', transition: '0.3s' }}>
+             🚀 앱 설치파일 다운로드
+          </a>
+
+          <div style={{ marginTop: '30px', fontSize: '13px', color: '#888', background: '#fff', padding: '15px', borderRadius: '10px', display: 'inline-block', textAlign: 'left' }}>
+            <strong>⚠️ 설치 가이드</strong><br />
+            1. 다운로드 후 <strong>'파일 열기'</strong>를 눌러주세요.<br />
+            2. 보안 경고가 뜨면 <strong>[설정]</strong> -&gt; <strong>[이 출처 허용]</strong>을 켜주세요.<br />
+            3. 서버(사장님 PC)가 켜져 있어야 로그인이 가능합니다.
+          </div>
+        </div>
+      </section>
+
+    </div> 
+  );
+}
